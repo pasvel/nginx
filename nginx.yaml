@@ -48,7 +48,7 @@ metadata:
     cloud.google.com/load-balancer-type: "Internal"
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.3.104.104
+  loadBalancerIP: 10.3.103.100
   ports:
     - port: 80
       targetPort: 80
