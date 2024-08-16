@@ -1,0 +1,16 @@
+kubernetesClusterDomain: cluster.local
+ocrDefault:
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-d-ocr.iam.gserviceaccount.com
+test:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  replicas: 1
+  test:
+    image:
+      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-d-docker/test
+      tag: latest
+  type: LoadBalancer
