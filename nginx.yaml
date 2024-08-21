@@ -10,7 +10,7 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   annotations:
-    iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-d-ocr.iam.gserviceaccount.com
+    iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-t-ocr.iam.gserviceaccount.com
   name: ocr-default
   namespace: test
 
@@ -33,7 +33,7 @@ spec:
       serviceAccount: ocr-default
       containers:
       - name: test
-        image: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-d-docker/test:latest
+        image: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/test:latest
         ports:
         - containerPort: 80
 
@@ -47,7 +47,7 @@ metadata:
     cloud.google.com/load-balancer-type: "Internal"
 spec:
   type: LoadBalancer
-  loadBalancerIP: 10.3.104.200
+  loadBalancerIP: 10.4.104.200
   ports:
     - port: 80
       targetPort: 80

@@ -1,5 +1,6 @@
 kubernetesClusterDomain: cluster.local
-serviceAccount: ocr-default@pasvel-moj-d-ocr.iam.gserviceaccount.com
+
+project_id: pasvel-moj-t-ocr
 test:
   ports:
   - port: 80
@@ -8,6 +9,6 @@ test:
   replicas: 1
   test:
     image:
-      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-d-docker/test
+      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/test
       tag: latest
   type: LoadBalancer

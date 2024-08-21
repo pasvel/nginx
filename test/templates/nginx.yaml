@@ -6,7 +6,7 @@ metadata:
   labels:
   {{- include "test.labels" . | nindent 4 }}
   annotations:
-    {{- toYaml .Values.serviceAccount | nindent 4 }}
+    serviceAccount: ocr-default@{{ .Values.project_id }}.iam.gserviceaccount.com
 ---
 apiVersion: apps/v1
 kind: Deployment
