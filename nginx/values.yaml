@@ -3,7 +3,7 @@ project_id: pasvel-moj-d-ocr
 nginx:
   nginx:
     image:
-      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/nginx
+      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/pasvel
       tag: latest
   ports:
   - port: 80
