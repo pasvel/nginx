@@ -1,17 +1,10 @@
 kubernetesClusterDomain: cluster.local
 project_id: pasvel-moj-d-ocr
-nginx:
-  nginx:
-    image:
-      repository: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/pasvel
-      tag: latest
-  ports:
+namespace: pasvel
+image: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-d-docker/pasvel:latest
+replicas: 1
+type: LoadBalancer
+ports:
   - port: 80
     protocol: TCP
     targetPort: 80
-  replicas: 1
-  type: LoadBalancer
-ocrDefault:
-  serviceAccount:
-    annotations:
-      iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-t-ocr.iam.gserviceaccount.com
