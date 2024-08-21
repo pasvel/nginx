@@ -1,9 +1,9 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-  name: test
+  name: nginx-test
   labels:
-    name: test
+    name: nginx-test
 
 ---
 apiVersion: v1
@@ -12,28 +12,28 @@ metadata:
   annotations:
     iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-t-ocr.iam.gserviceaccount.com
   name: ocr-default
-  namespace: test
+  namespace: nginx
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: test
-  namespace: test
+  name: nginx-test
+  namespace: nginx
 spec:
   selector:
     matchLabels:
-      app: test
+      app: nginx-test
   replicas: 1
   template:
     metadata:
       labels:
-        app: test
+        app: nginx-test
     spec:
       serviceAccount: ocr-default
       containers:
-      - name: test
-        image: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-t-docker/test:latest
+      - name: nginx-test
+        image: me-west1-docker.pkg.dev/pasvel-moj-t-ocr/ocr-t-docker/pasvel:latest
         ports:
         - containerPort: 80
 
@@ -41,8 +41,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: test
-  namespace: test
+  name: nginx-test
+  namespace: nginx
   annotations:
     cloud.google.com/load-balancer-type: "Internal"
 spec:
@@ -53,4 +53,4 @@ spec:
       targetPort: 80
       protocol: TCP
   selector:
-    app: test
+    app: nginx-test

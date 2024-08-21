@@ -1,0 +1,56 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: nginx-dev
+  labels:
+    name: nginx-dev
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    iam.gke.io/gcp-service-account: ocr-default@pasvel-moj-d-ocr.iam.gserviceaccount.com
+  name: ocr-default
+  namespace: nginx
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-dev
+  namespace: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx-dev
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: nginx-dev
+    spec:
+      serviceAccount: ocr-default
+      containers:
+      - name: nginx-dev
+        image: me-west1-docker.pkg.dev/pasvel-moj-d-ocr/ocr-d-docker/pasvel:latest
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-dev
+  namespace: nginx
+  annotations:
+    cloud.google.com/load-balancer-type: "Internal"
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 10.3.104.200
+  ports:
+    - port: 80
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: nginx-dev
